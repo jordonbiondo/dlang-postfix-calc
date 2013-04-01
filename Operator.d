@@ -103,7 +103,7 @@ class InfixPostfix {
   }
 
   private bool isRightParen(string str) {
-    return str == "(";
+    return str == ")";
   }
 
   private int stackPrecedence(string operator) {
@@ -118,8 +118,23 @@ class InfixPostfix {
     return operators[operator].operation(to!int(num1), to!int(num2));
   }
 
+
+  /*
+   * Tests
+   */
   unittest {
     InfixPostfix ifpf = new InfixPostfix;
+    //left paren
+    assert(ifpf.isLeftParen("("));
+    assert(! ifpf.isLeftParen(" ("));
+    assert(! ifpf.isLeftParen(")"));
+
+    //right
+    assert(ifpf.isRightParen(")"));
+    assert(! ifpf.isRightParen(" )"));
+    assert(! ifpf.isRightParen("("));
+
+    //apply operator
     assert(2 == ifpf.applyOperator("1", "1", "+"));
     assert(2 == ifpf.applyOperator("29", "10", "/"));
     assert(0 == ifpf.applyOperator("10", "29", "/"));
