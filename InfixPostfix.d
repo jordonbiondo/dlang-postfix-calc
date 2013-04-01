@@ -140,6 +140,11 @@ class InfixPostfix {
   //   Unit testing for InfixPostfix
   // /////////////////////////////////////////////////////////////////
   unittest {
+
+    // time the testing
+    import core.time;
+    auto x = TickDuration.currSystemTick().length;
+
     InfixPostfix ifpf = new InfixPostfix;
     //left paren
     assert(ifpf.isLeftParen("("));
@@ -151,7 +156,7 @@ class InfixPostfix {
     assert(! ifpf.isRightParen(" )"));
     assert(! ifpf.isRightParen("("));
 
-
+    // is operand
     assert(ifpf.isOperand("10"));
     assert(ifpf.isOperand("3"));
     assert(ifpf.isOperand("111"));
@@ -198,6 +203,9 @@ class InfixPostfix {
     assert(35== ifpf.evaluatePostfix("10 54 10 % 25 10 - 2 2 ^ + * 3 / +"));
     assert(141== ifpf.evaluatePostfix("10 5 2 % + 5 3 3 ^ * + 25 5 / -"));
 
+    // print testing time
+    float timeTaken = (to!float(TickDuration.currSystemTick().length - x))/TickDuration.ticksPerSec;
+    writeln(timeTaken, " seconds for testing");
   }
 }
 
