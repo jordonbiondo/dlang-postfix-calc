@@ -1,10 +1,5 @@
 module StringStack;
 
-import std.stdio;
-import std.array;
-import std.conv;
-import std.algorithm;
-import std.string;
 import std.container;
 
 /**
@@ -16,7 +11,6 @@ class StringStack {
   /**
    * The data is stored in an array called stack.
    */
-  //private string[] stack;
   private SList!string stack;
 
 

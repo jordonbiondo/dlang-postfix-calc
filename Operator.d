@@ -1,11 +1,3 @@
-import std.stdio;
-import std.array;
-import std.conv;
-import std.container;
-import std.algorithm;
-import std.regex;
-import std.string;
-
 /*
  * Operator.
  * Represents a mathematical operator that performs integer calculations
