@@ -21,13 +21,12 @@ class InfixPostfix {
    */
   Operator[string] operators;
 
-
   /*
    * Constructor
    */
   this() {
     operators = [
-		 "+": new Operator("+", 1, 1, (a, b) => to!int(a) + to!int(b)),
+		 "+": new Operator("+", 1, 1,(a, b) => to!int(a) + to!int(b)),
 		 "-": new Operator("-", 1, 1, (a, b) => to!int(a) - to!int(b)),
 		 "*": new Operator("*", 2, 2, (a, b) => to!int(a) * to!int(b)),
 		 "/": new Operator("/", 2, 2, (a, b) => to!int(a) / to!int(b)),
@@ -80,8 +79,7 @@ class InfixPostfix {
    */
   public int evaluatePostfix(string exprStr) {
     StringStack stack = new StringStack();
-
-    foreach(token; split(exprStr)) {
+    foreach(immutable string token; split(exprStr)) {
       if (isOperand(token) ) {
 	stack.push(token);
       } else if (isOperator(token)) {
@@ -95,43 +93,43 @@ class InfixPostfix {
 
 
   /// True is str is an operator
-  private bool isOperator(string str) {
+  private bool isOperator(immutable string str) {
     return ! find(operators.keys, str).empty;
   }
 
 
   /// true if str is an operand (number)
-  private bool isOperand(string str) {
+  private bool isOperand(immutable string str) {
     return ! match(str, regex("^[0-9]+$")).empty;
   }
 
 
   /// true if str is a left parenthesis
-  private bool isLeftParen(string str) {
+  private bool isLeftParen(immutable string str) {
     return str == "(";
   }
 
 
   /// true is str is a right parenthesis
-  private bool isRightParen(string str) {
+  private bool isRightParen(immutable string str) {
     return str == ")";
   }
 
 
   /// return the stack pre.cendence of an operator
-  private int stackPrecedence(string operator) {
+  private int stackPrecedence(immutable string operator) {
     return operators[operator].stackPrecedence;
   }
 
 
   /// return the input precendence of an operator
-  private int inputPrecedence(string operator) {
+  private int inputPrecedence(immutable string operator) {
     return operators[operator].inputPrecedence;
   }
 
 
   /// return the result of applying operator to num1 and num2
-  private int applyOperator(string num1, string num2, string  operator) {
+  private int applyOperator(string num1, string num2, string operator) {
     return operators[operator].operation(to!int(num1), to!int(num2));
   }
 
@@ -146,8 +144,10 @@ class InfixPostfix {
     auto x = TickDuration.currSystemTick().length;
 
     InfixPostfix ifpf = new InfixPostfix;
-    //left paren
+    //    left paren
     assert(ifpf.isLeftParen("("));
+    assert(!ifpf.isLeftParen("d"));
+
     assert(! ifpf.isLeftParen(" ("));
     assert(! ifpf.isLeftParen(")"));
 
@@ -213,6 +213,4 @@ class InfixPostfix {
 //   Main
 // /////////////////////////////////////////////////////////////////
 void main() {
-  // compile with -unittest and run, if no output, all is well
-  // ex: ~$ dmd -unittest Operator.d
 }
