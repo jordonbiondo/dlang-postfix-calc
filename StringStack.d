@@ -5,7 +5,7 @@ import std.array;
 import std.conv;
 import std.algorithm;
 import std.string;
-
+import std.container;
 
 /**
  * String stack
@@ -16,14 +16,15 @@ class StringStack {
   /**
    * The data is stored in an array called stack.
    */
-  private string[] stack;
+  //private string[] stack;
+  private SList!string stack;
 
 
   /*
    * Constructor.
    */
   this() {
-    stack = new string[0];
+    stack = SList!string();
   }
 
 
@@ -31,7 +32,7 @@ class StringStack {
    * Push string onto the stack.
    */
   public void push(string s) {
-    stack.insertInPlace(0, s);
+    stack.stableInsertFront(s);
   }
 
 
@@ -39,8 +40,7 @@ class StringStack {
    * Peek at the top element of the stack.
    */
   public string peek() {
-    return (stack.length == 0 ? null : stack.front());
-    //return stack.front();
+    return (stack.empty ? null : stack.front());
   }
 
 
@@ -49,7 +49,7 @@ class StringStack {
    */
   public string pop() {
     string r = peek();
-    stack.popFront();
+    stack.stableRemoveFront();
     return r;
   }
 
@@ -57,7 +57,7 @@ class StringStack {
   /*
    * Return the full array.
    */
-  public string[] getStack() {
+  public SList!string getStack() {
     return stack;
   }
 
