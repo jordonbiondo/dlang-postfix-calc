@@ -2,3 +2,5 @@
 *.o
 *~
 bin/*
+/DelegateTest
+/DelegateTest.d
