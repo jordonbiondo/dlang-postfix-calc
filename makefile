@@ -12,7 +12,9 @@ default: $(BINDIR)/$(BINNAME);
 $(BINDIR)/$(BINNAME): InfixPostfix.d Operator.d StringStack.d
 	mkdir -p $(BINDIR); $(DC) $(FLAGS) $(RELEASEFLAGS) -of$(BINDIR)/$(BINNAME) $^
 
+
 test: $(BINDIR)/$(TESTNAME)
+
 $(BINDIR)/$(TESTNAME): InfixPostfix.d Operator.d StringStack.d
 	mkdir -p $(BINDIR);$(DC) $(FLAGS) $(TESTFLAGS) -of$(BINDIR)/$(TESTNAME) $^
 

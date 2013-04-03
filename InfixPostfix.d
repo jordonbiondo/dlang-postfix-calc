@@ -2,6 +2,7 @@ module InfixPostfix;
 
 import StringStack;
 import Operator;
+
 import std.stdio;
 import std.array;
 import std.conv;
@@ -15,7 +16,6 @@ import std.string;
  * Translates infix math strings to post fix and can evaluate post fix calculations
  */
 class InfixPostfix {
-
   /*
    * String indexed map of Operators
    */
@@ -118,7 +118,7 @@ class InfixPostfix {
   }
 
 
-  /// return the stack precendence of an operator
+  /// return the stack pre.cendence of an operator
   private int stackPrecedence(string operator) {
     return operators[operator].stackPrecedence;
   }
@@ -171,8 +171,8 @@ class InfixPostfix {
     assert(ifpf.isOperator("-"));
     assert(ifpf.isOperator("*"));
     assert(ifpf.isOperator("/"));
-    assert( ! ifpf.isOperator("10"));
-    assert( ! ifpf.isOperator("//"));
+    assert(! ifpf.isOperator("10"));
+    assert(! ifpf.isOperator("//"));
     assert(! ifpf.isOperator("+10"));
     assert(! ifpf.isOperator("2^"));
 
@@ -202,7 +202,6 @@ class InfixPostfix {
     assert(2== ifpf.evaluatePostfix("100 50 2 3 ^ - / 50 10 / - 5 +"));
     assert(35== ifpf.evaluatePostfix("10 54 10 % 25 10 - 2 2 ^ + * 3 / +"));
     assert(141== ifpf.evaluatePostfix("10 5 2 % + 5 3 3 ^ * + 25 5 / -"));
-
     // print testing time
     float timeTaken = (to!float(TickDuration.currSystemTick().length - x))/TickDuration.ticksPerSec;
     writeln(timeTaken, " seconds for testing");
@@ -217,5 +216,3 @@ void main() {
   // compile with -unittest and run, if no output, all is well
   // ex: ~$ dmd -unittest Operator.d
 }
-
-

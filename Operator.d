@@ -25,8 +25,6 @@ class Operator {
   /// Operation to be performed given: A *operator* B
   int delegate(int, int) operation;
 
-
-
   /*
    * Constuctor
    */
